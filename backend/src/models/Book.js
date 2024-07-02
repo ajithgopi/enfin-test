@@ -1,21 +1,24 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const bookSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: true
   },
-  email: {
+  description: {
     type: String,
-    required: true,
-    unique: true,
+    required: true
   },
-  password: {
-    type: String,
-    required: true,
+  date_published: {
+    type: Date,
+    required: true
   },
-}, {
-  timestamps: true,
-});
+  price: {
+    type: Number,
+    required: true
+  }
+})
 
-module.exports = mongoose.model('Book', bookSchema);
+bookSchema.index({ name: 'text', description: 'text' })
+
+module.exports = mongoose.model('Book', bookSchema)
